@@ -1,0 +1,1 @@
+# JAVASCRIPT Projects for beginners
