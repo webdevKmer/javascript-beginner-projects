@@ -21,6 +21,37 @@
     </header>
     <main>
         <h1>Suivi de caisse</h1>
+        <form action="" method="post">
+            <input type="text" name="mvt-label" id="mvt-label" placeholder="Designation..." required >
+            <input type="number" name="mvt-amount" id="mvt-amount" min=0 max=9999999 placeholder="Montant" required >
+            <select name="mvt-type" id="mvt-type">
+                <option value="entree">Entree</option>
+                <option value="sortie">Sortie</option>
+            </select>
+            <button type="submit" id="add-transaction-btn">Add this transaction</button>
+        </form>
+        <p class="message"></p>
+        <hr>
+        <h4>Les mouvements de caisse</h4>
+        <button id="entree-btn">Entrees</button>
+        <button id="sortie-btn">Sorties</button>
+        <p>Total : <span id="total"></span></p>
+        <table>
+            <th>
+                <tr>
+                    <td>Designation</td>
+                    <td>Type</td>
+                    <td>Amount</td>
+                </tr>
+            </th>
+            <tbody class="mvt-list">
+                <tr>
+                    <td class="mvt-label">Oignons</td>
+                    <td class="mvt-type">Entree</td>
+                    <td class="mvt-amount">2000</td>
+                </tr>
+            </tbody>
+        </table>            
     </main>
     <footer>
         <small>Copyright &copy; Web Dev Kmer 2023</small>
