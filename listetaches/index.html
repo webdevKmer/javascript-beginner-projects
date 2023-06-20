@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <title>Liste de taches</title>
+    <script defer src="liste.js"></script>
 </head>
 <body>
     <header>
@@ -21,10 +22,35 @@
     </header>
     <main>
         <h1>Liste de taches</h1>
+        <form action="/" id="form">
+            <input type="text" name="task" id="task" placeholder="Task to do..." required >
+            <select name="status" id="status">
+                <option value="undone">Undone</option>
+                <option value="done">Done</option>
+            </select>
+            <button type="submit" id="add-task-btn">Add the task</button>
+        </form>
+        <p class="message"></p>
+        <hr>
+        <h4>Les taches enregistrees (<span id="task-number"></span>)</h4>
+        <button id="list-done-btn">Done</button>
+        <button id="list-undone-btn">Undone</button>
+        <p>Nbre de taches : <span id="total"></span></p>
+        <table>
+            <th>
+                <tr>
+                    <td>Designation</td>
+                    <td>Status</td>
+                    <td>Mark Done</td>
+                    <td>Delete</td>
+                </tr>
+            </th>
+            <tbody class="task-list">
+            </tbody>
+        </table>            
     </main>
     <footer>
         <small>Copyright &copy; Web Dev Kmer 2023</small>
     </footer>
-    <script src="liste.js"></script>
 </body>
 </html>
