@@ -13,32 +13,44 @@ const resetForm = () => {
 }
 let transactions = []
 let total = 0
+let total_entrees = 0
+let total_sorties = 0
 
 entreeBtn.addEventListener('click', () => {
     console.log("Je liste les entrees...");
     let filtered_transactions = transactions.filter((transaction) => transaction.type == "entree")
     console.log(filtered_transactions);
-    total = filtered_transactions.reduce((acc, curValue) => { return acc + curValue }, 0)
-    console.log(total);
+    total_entrees = 0
+    filtered_transactions.forEach((transac)=>{
+        total_entrees += parseInt(transac.amount)
+    })
+    console.log(total_entrees);
 
 })
 sortieBtn.addEventListener('click', () => {
     console.log("Je liste les sorties...");
     let filtered_transactions = transactions.filter((transaction) => transaction.type == "sortie")
     console.log(filtered_transactions);
-    total = filtered_transactions.reduce((arr, trans) => { 
-        trans.amount += trans.amount;        
-        return arr }, [])
-    console.log(total);
+    total_sorties = 0
+    filtered_transactions.forEach((transac)=>{
+        total_sorties += parseInt(transac.amount)
+    })
+    console.log(total_sorties);
 })
 addTransactionBtn.addEventListener('click', (e) => {
     e.preventDefault()
-    transaction = {
-        'label': mvtInputElt.value,
-        'amount': amountInputElt.value,
-        'type': typeInputElt.value,
+    if(mvtInputElt.value == ""){
+        formMessage.textContent = "Enter a Label for the transcaction"
+    } else if (amountInputElt.value == ""){
+        formMessage.textContent = "Enter an amount for the transcaction"
+    } else {
+        transaction = {
+            'label': mvtInputElt.value,
+            'amount': amountInputElt.value,
+            'type': typeInputElt.value,
+        }
+        transactions.push(transaction)
     }
-    transactions.push(transaction)
     console.log(transactions);
     document.querySelector('.mvt-list').innerHTML = 
     transactions.map(transaction => (
@@ -48,7 +60,16 @@ addTransactionBtn.addEventListener('click', (e) => {
             <td class="mvt-amount">${transaction.amount}</td>
         </tr>`
     )).join("")
-
+    total = 0
+    transactions.forEach((transac)=>{
+        if(transac.type == 'sortie'){
+            total -= parseInt(transac.amount)
+        }else{
+            total += parseInt(transac.amount)
+        }
+    })
+    // total = parseInt(total_entrees - total_sorties)
+    console.log(total_entrees, total_sorties, total);
     document.querySelector('#total').innerHTML = total
 
     resetForm()
